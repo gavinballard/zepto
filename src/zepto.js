@@ -10,6 +10,8 @@ var Zepto = (function() {
   function isF(value) { return ({}).toString.call(value) == "[object Function]" }
   function isO(value) { return value instanceof Object }
   function isA(value) { return value instanceof Array }
+  function isN(value) { return value === null }
+  function isNN(value) { return !isN(value) }
 
   function compact(array) { return array.filter(function(item){ return item !== undefined && item !== null }) }
   function flatten(array) { return [].concat.apply([], array) }
@@ -64,6 +66,7 @@ var Zepto = (function() {
   }
 
   $.extend = function(target, source){ for (key in source) target[key] = source[key]; return target }
+  $.filter = function(source, pred){ var r = {}; for (key in source) if(pred(source[key])) r[key] = source[key]; return r }
   $.qsa = $$ = function(element, selector){ return slice.call(element.querySelectorAll(selector)) }
 
   function filtered(nodes, selector){
@@ -77,6 +80,8 @@ var Zepto = (function() {
   $.isFunction = isF;
   $.isObject = isO;
   $.isArray = isA;
+  $.isNull = isN;
+  $.isNotNull = isNN;
 
   $.fn = {
     forEach: emptyArray.forEach,

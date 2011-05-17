@@ -52,7 +52,7 @@
     var mime = settings.accepts[settings.dataType],
         xhr = new XMLHttpRequest();
 
-    settings.headers = $.extend({'X-Requested-With': 'XMLHttpRequest'}, settings.headers || {});
+    settings.headers = $.filter($.extend({'X-Requested-With': 'XMLHttpRequest'}, settings.headers || {}), $.isNotNull);
     if (mime) settings.headers['Accept'] = mime;
 
     xhr.onreadystatechange = function(){
